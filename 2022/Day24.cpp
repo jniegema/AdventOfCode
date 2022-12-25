@@ -76,7 +76,7 @@ bool isFree(IntT r, IntT c, std::multiset<B> const& b, IntT const M, IntT const 
     return !b.contains(B(r, c, 0, 0));
 }
 
-int main()
+int main24()
 {
     const auto rawFile = loadFile("Data/aoc_input_24.txt");
 
