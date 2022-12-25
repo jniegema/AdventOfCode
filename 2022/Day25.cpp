@@ -45,7 +45,6 @@ std::string toSnafu(IntT n) {
     IntT d = 1;
     while ( (2*exp) <= n) { exp *= 5; d++; }
 
-
     std::string s(d, '0');
     IntT remainder = n;
     for (int j = 0; j <d; j++) {
@@ -65,7 +64,7 @@ std::string toSnafu(IntT n) {
     return s;
 }
 
-int main()
+int main25()
 {
     const auto rawFile = loadFile("Data/aoc_input_25.txt");
 
