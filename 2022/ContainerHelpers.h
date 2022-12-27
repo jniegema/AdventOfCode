@@ -5,9 +5,9 @@
 
 void print(auto const& view)
 {
-    cout << "{ ";
-    for (const auto element : view)  cout << element << ' ';
-    cout << "} ";
+    std::cout << "{ ";
+    for (const auto element : view)  std::cout << element << ' ';
+    std::cout << "} ";
 };
 
 void printSplitView(auto outer_view)

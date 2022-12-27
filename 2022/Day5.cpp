@@ -1,4 +1,5 @@
 #include "StringToVector.h"
+#include "FileIO.h"
 
 #include <iostream>
 #include <iterator>
@@ -12,36 +13,36 @@
 #include <numeric>
 #include <cassert>
 
-void printStack(std::vector<std::vector<char>> const & stack) {
+using namespace std;
+namespace sr = std::ranges;
+
+void printStack(vector<vector<char>> const & stack) {
 
     for (int i = 0; i < stack.size(); ++i) {
-        std::cout << i << ": ";
+        cout << i << ": ";
         for (int j = 0; j < stack[i].size(); ++j) {
-            std::cout << stack[i][j] << ", ";
+            cout << stack[i][j] << ", ";
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 }
 
 
-void main5()
+int main()
 {
-    std::ifstream file1("aoc_input_5a.txt");
-    std::vector<std::string> rawStacks(std::istream_iterator<std::string>(file1), {});
-    std::vector<std::vector<char>> stacks;
+    vector<string> rawStacks = loadFile("Data/aoc_input_5a.txt");
+    vector<vector<char>> stacks;
     for (auto const rawStack : rawStacks) {
         stacks.push_back(stringToVectorOfChar(rawStack,','));
     }
 
-
-    std::ifstream file2("aoc_input_5b.txt");
-    std::vector<std::string> procedure(std::istream_iterator<std::string>(file2), {});
-    std::vector<std::vector<int>> listOfProcedures;
+    vector<string> procedure = loadFile("Data/aoc_input_5b.txt");
+    vector<vector<int>> listOfProcedures;
     for (auto const proc : procedure) {
         listOfProcedures.push_back(stringToVectorOfInt(proc, ','));
     }
 
-    std::vector<std::vector<char>> stacks1 = stacks;
+    vector<vector<char>> stacks1 = stacks;
     for (auto const & curProc : listOfProcedures) {
         const int num = curProc[0];
         const int from = curProc[1]-1;
@@ -54,27 +55,27 @@ void main5()
         }
     }
 
-    std::cout << "Result for Part I : ";
-    std::for_each(stacks1.cbegin(), stacks1.cend(), [](auto const& c) {std::cout << c.back(); });
-    std::cout << std::endl;
+    cout << "Result for Part I : ";
+    sr::for_each(stacks1, [](auto const& c) {cout << c.back(); });
+    cout << endl;
 
 
-    std::vector<std::vector<char>> stacks2 = stacks;
-    //printStack(stacks2);
+    vector<vector<char>> stacks2 = stacks;
+
     for (auto const& curProc : listOfProcedures) {
         const int num = curProc[0];
         const int from = curProc[1] - 1;
         const int to = curProc[2] - 1;
 
- //       std::cout << "Procedure: " << num << " from " << from << " to " << to << std::endl;
-
         stacks2[to].insert(stacks2[to].end(), stacks2[from].end()-num, stacks2[from].end());
         stacks2[from].erase(stacks2[from].end() - num, stacks2[from].end());
  //       printStack(stacks2);
- //       std::cout << "---" << std::endl;
+ //       cout << "---" << endl;
     }
 
-    std::cout << "Result for Part II : ";
-    std::for_each(stacks2.cbegin(), stacks2.cend(), [](auto const& c) {std::cout << c.back(); });
-    std::cout << std::endl;
+    cout << "Result for Part II : ";
+    sr::for_each(stacks2, [](auto const& c) {cout << c.back(); });
+    cout << endl;
+
+    return EXIT_SUCCESS;
 }

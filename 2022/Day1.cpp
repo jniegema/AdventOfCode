@@ -11,7 +11,7 @@ using namespace std;
 
 int toInt(string const& s) { return stoi(s); }
 
-int main()
+int main1()
 {
     const auto rawFile = loadFile("Data/aoc_input_1.txt");
 

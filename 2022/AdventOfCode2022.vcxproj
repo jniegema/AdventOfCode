@@ -136,6 +136,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ContainerHelpers.h" />
     <ClCompile Include="Day1.cpp" />
     <ClCompile Include="Day10.cpp" />
     <ClCompile Include="Day11.cpp" />

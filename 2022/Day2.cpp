@@ -8,6 +8,7 @@
 #include <string_view>
 
 #include <string>
+#include <cassert>
 #include <numeric>
 
 
@@ -73,7 +74,7 @@ int totalScore2(std::pair<int, int> const& game) {
 
 void main2()
 {
-    std::ifstream file("aoc_input_2.txt");
+    std::ifstream file("Data/aoc_input_2.txt");
     std::vector<std::pair<int,int>> listOfGames;
 
     std::string str;
@@ -86,7 +87,7 @@ void main2()
     std::transform(listOfGames.cbegin(), listOfGames.cend(), std::back_inserter(scores1), &totalScore1);
 
     const auto sumOfScores = std::accumulate(scores1.cbegin(), scores1.cend(), 0);
-
+    assert(sumOfScores == 13268);
     std::cout << "Result for Part I: " << sumOfScores << std::endl;
 
 
@@ -95,6 +96,6 @@ void main2()
     std::transform(listOfGames.cbegin(), listOfGames.cend(), std::back_inserter(scores2), &totalScore2);
 
     const auto sumOfScores2 = std::accumulate(scores2.cbegin(), scores2.cend(), 0);
-
+    assert(sumOfScores2 == 15508);
     std::cout << "Result for Part II: " << sumOfScores2 << std::endl;
 }
