@@ -28,7 +28,7 @@ void printStack(vector<vector<char>> const & stack) {
 }
 
 
-int main()
+int main5()
 {
     vector<string> rawStacks = loadFile("Data/aoc_input_5a.txt");
     vector<vector<char>> stacks;

@@ -1,10 +1,12 @@
 #include "StringToVector.h"
+#include "FileIO.h"
+#include "ContainerHelpers.h"
 
 #include <iostream>
 #include <iterator>
 #include <fstream>
 #include <vector>
-#include <algorithm>
+
 #include <ranges>
 #include <string_view>
 #include <array>
@@ -12,38 +14,37 @@
 #include <numeric>
 #include <cassert>
 
+using namespace std;
+namespace sr = std::ranges;
 
-template<typename C>
-bool isAllUnique(C b) {
-    auto const N = b.size();
-    std::sort(b.begin(), b.end());
-    auto last = std::unique(b.begin(), b.end());
-    b.erase(last, b.end());
-    return N == b.size();
-}
 
-std::size_t findStart(std::string const& s, const std::size_t L) {
-    std::vector<char> buffer(s.begin(), s.begin() + L);
+size_t findStart(string const& s, const size_t L) {
+    vector<char> buffer(s.begin(), s.begin() + L);
     const auto N = s.size();
-    for (std::size_t i = L; i < N; ++i) {
+    for (size_t i = L; i < N; ++i) {
 
         if (!isAllUnique(buffer)) {
             buffer[i % L] = s[i];
-        }
-        else {
+        } else {
             return i;
         }
     }
     return 0;
 }
 
-void main6()
+int main()
 {
-    std::ifstream file1("aoc_input_6.txt");
-    std::vector<std::string> rawFile(std::istream_iterator<std::string>(file1), {});
+    vector<string> rawFile = loadFile("Data/aoc_input_6.txt");
+
     auto const s = rawFile[0];
 
-    std::cout << "Result for Part I : " << findStart(s, 4) << std::endl;
+    const auto result1 = findStart(s, 4);
+    cout << "Result for Part I : " << result1 << endl;
+    assert(result1 == 1262);
 
-    std::cout << "Result for Part II : " << findStart(s, 14) << std::endl;
+    const auto result2 = findStart(s, 14);
+    cout << "Result for Part II : " << result2 << endl;
+    assert(result2 == 3444);
+
+    return EXIT_SUCCESS;
 }

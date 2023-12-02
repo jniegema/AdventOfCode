@@ -6,7 +6,7 @@
 #include <iterator>
 #include <fstream>
 #include <vector>
-#include <algorithm> // forcopy
+#include <algorithm> // for copy
 #include <ranges>
 #include <string_view>
 

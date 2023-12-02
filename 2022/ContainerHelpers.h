@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <ranges>
+#include <algorithm>
+
+namespace sr = std::ranges;
 
 void print(auto const& view)
 {
@@ -16,3 +19,11 @@ void printSplitView(auto outer_view)
     for (auto const& inner_view : outer_view) print(inner_view);
 };
 
+/**
+ * Returns true if all elements in a container/range are unique
+ **/
+template<typename C>
+bool isAllUnique(C b) {
+    sr::sort(b);
+    return (sr::adjacent_find(b) == b.end());
+}

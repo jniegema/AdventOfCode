@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventOfCode2022", "2022\AdventOfCode2022.vcxproj", "{BE56E47B-045D-4A1A-87EF-A984427AF65A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventOfCode2023", "2023\AdventOfCode2023\AdventOfCode2023.vcxproj", "{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{BE56E47B-045D-4A1A-87EF-A984427AF65A}.Release|x64.Build.0 = Release|x64
 		{BE56E47B-045D-4A1A-87EF-A984427AF65A}.Release|x86.ActiveCfg = Release|Win32
 		{BE56E47B-045D-4A1A-87EF-A984427AF65A}.Release|x86.Build.0 = Release|Win32
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Debug|x64.ActiveCfg = Debug|x64
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Debug|x64.Build.0 = Debug|x64
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Debug|x86.ActiveCfg = Debug|Win32
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Debug|x86.Build.0 = Debug|Win32
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Release|x64.ActiveCfg = Release|x64
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Release|x64.Build.0 = Release|x64
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Release|x86.ActiveCfg = Release|Win32
+		{C9A4BC53-B9D9-448E-AFE4-FC6095F2C4AD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
