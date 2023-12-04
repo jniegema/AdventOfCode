@@ -14,6 +14,16 @@ inline void replaceStringInPlace(std::string& subject, const std::string& search
     }
 }
 
+inline void removeBefore(std::string& subject, std::string const & removeBefore) {
+    const size_t pos = subject.find(removeBefore); subject.erase(0, pos + 1);
+}
+
+inline std::string removeBefore(std::string const& subject, std::string const& removeBefore) {
+    std::string result = subject;
+    const size_t pos = result.find(removeBefore); result.erase(0, pos + 1);
+    return result;
+}
+
 
 inline std::vector<std::string> stringToVector(std::string const& s, char delimiter) {
     std::vector<std::string> result;
@@ -39,7 +49,7 @@ inline std::vector<int> stringToVectorOfInt(std::string const& s, char delimiter
 
     std::stringstream ss(s);
     while (std::getline(ss, token, delimiter)) {
-        result.push_back(std::stoi(token));
+        if(token!="") result.push_back(std::stoi(token));
     }
     return result;
 }

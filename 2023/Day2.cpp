@@ -31,7 +31,7 @@ bool isValid(Draw const & draw) {
     return (draw.red <= maxRed) && (draw.green <= maxGreen) && (draw.blue <= maxBlue);
 }
 
-int main()
+int main2()
 {
     const auto rawFile = loadFile("Data/aoc_input_2.txt");
 
@@ -41,8 +41,7 @@ int main()
     for (IntT i = 0; i < rawFile.size(); ++i) {
         const auto row = rawFile[i];
         auto items = stringToVector(row, ';');
-
-        size_t pos = items[0].find(": "); items[0].erase(0, pos+1);
+        removeBefore(items[0], ": ");
 
         std::vector<Draw> listOfDraws;
         Draw maxDraw;
