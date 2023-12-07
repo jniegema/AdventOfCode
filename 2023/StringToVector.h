@@ -43,13 +43,13 @@ inline std::vector<std::string> stringToVectorNoEmpty(std::string const& s, char
 }
 
 
-inline std::vector<int> stringToVectorOfInt(std::string const& s, char delimiter) {
-    std::vector<int> result;
+inline std::vector<long long int> stringToVectorOfInt(std::string const& s, char delimiter) {
+    std::vector<long long int> result;
     std::string token;
 
     std::stringstream ss(s);
     while (std::getline(ss, token, delimiter)) {
-        if(token!="") result.push_back(std::stoi(token));
+        if(token!="") result.push_back(std::stoll(token));
     }
     return result;
 }

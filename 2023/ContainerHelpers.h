@@ -5,6 +5,7 @@
 #include <algorithm>
 
 namespace sr = std::ranges;
+namespace sv = std::views;
 
 void print(auto const& view)
 {
