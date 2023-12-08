@@ -119,7 +119,7 @@ IntT sumCards(std::vector < std::pair<std::string, IntT> > const& cardList) {
     return sr::fold_left(sv::enumerate(cardList) | sv::transform([](auto x) {auto const [i, card] = x; return (i + 1) * card.second; }), IntT(0), std::plus<IntT>());
 }
 
-int main()
+int main7()
 {
     const auto rawFile = loadFile("Data/aoc_input_7.txt");
 
