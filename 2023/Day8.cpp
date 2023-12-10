@@ -15,7 +15,7 @@ using namespace std;
 
 using IntT = long long int;
 
-int main()
+int main8()
 {
     const auto rawFile = loadFile("Data/aoc_input_8.txt");
 
