@@ -14,15 +14,16 @@
 #include <numeric>
 using namespace std;
 
-using IntT = long long int;
+using IntT  = long long int;
+using PIntT = pair<IntT, IntT>;
 
-pair<IntT, IntT> nextStep(vector<string> const& m, vector < pair<IntT, IntT>> const& path) {
-	// Coming from left to right
+PIntT nextStep(vector<string> const& m, vector<PIntT> const& path) {
 	auto cu = path.back();
 	auto pr = *prev(path.end(), 2);
 	auto ir = cu.first;
 	auto ic = cu.second;
 	auto cur = m[ir][ic];
+
 	if ((pr.first == cu.first) && ((pr.second + 1) == cu.second)) {
 		if (cur == '-') return make_pair(ir, ic + 1);
 		if (cur == '7') return make_pair(ir + 1, ic);
@@ -48,18 +49,19 @@ pair<IntT, IntT> nextStep(vector<string> const& m, vector < pair<IntT, IntT>> co
 		if (cur == 'F') return make_pair(ir, ic + 1);
 	}
 	assert(false);
+	return make_pair(0,0);
 }
 
-int main()
+int main10()
 {
 	const auto rawFile = loadFile("Data/aoc_input_10.txt");
 	const auto m = rawFile;
-	string rl = rawFile[0];
 
 	IntT sum1 = 0;
 	IntT sum2 = 0;
 
-	pair<IntT, IntT> start;
+	// Find the starting point
+	PIntT start;
 	for (int j = 0; j < rawFile.size(); j++)
 	{
 		auto row = rawFile[j];
@@ -70,7 +72,7 @@ int main()
 		}
 	}
 
-	std::vector<pair<IntT, IntT>> path1, path2;
+	vector<PIntT> path1, path2;
 	path1.emplace_back(start);
 	path2.emplace_back(start);
 
@@ -122,6 +124,7 @@ int main()
 	path1.emplace_back(paths[0]);
 	path2.emplace_back(paths[1]);
 
+
 	// What is the start symbol?
 	char startSym = 'S';
 	if (toL && toR) startSym = '-';
@@ -140,8 +143,8 @@ int main()
 
 	while (nextStep1 != nextStep2) {
 		nextStep1 = nextStep(m, path1);
-		nextStep2 = nextStep(m, path2);
 		path1.emplace_back(nextStep1);
+		nextStep2 = nextStep(m, path2);
 		path2.emplace_back(nextStep2);
 	}
 
@@ -151,7 +154,7 @@ int main()
 
 
 	// Part II
-	vector<pair<IntT, IntT>> fullPoly = path1;
+	vector<PIntT> fullPoly = path1;
 	auto nextStep3 = nextStep(m, fullPoly);
 	while (nextStep3 != fullPoly.front()) {
 		fullPoly.emplace_back(nextStep3);
@@ -159,7 +162,7 @@ int main()
 	}
 
 	sum2 = 0;
-	set<pair<IntT, IntT>> mm(fullPoly.begin(), fullPoly.end());
+	set<PIntT> mm(fullPoly.begin(), fullPoly.end());
 
 	auto m2 = m;
 	for (int i = 0; i < m.size(); ++i) {
@@ -188,10 +191,7 @@ int main()
 				continue;
 			}
 
-			if (curChar == '|') {
-				inside = !inside;
-				continue;
-			}
+			if (curChar == '|') { inside = !inside; continue; }
 
 			if ((curChar == 'F')) { hadF = true; continue; }
 			if (hadF && (curChar == 'J')) { hadF = false; inside = !inside; continue; }
