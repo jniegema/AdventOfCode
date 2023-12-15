@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include <stack>
 #include <numeric>
+#include <string_view> // C++17
 using namespace std;
 
 using IntT = long long int;
@@ -21,52 +22,42 @@ using IntT = long long int;
 map<pair<string, vector<IntT>>, IntT> memo;
 
 //
-IntT getNumSolutions(string const& s, vector<IntT> const& group) { //}, string curStr) {
-	const int N = s.size();
+IntT getNumSolutions(string_view s, vector<IntT> const& group, IntT grpPos) { //}, string curStr) {
+	const IntT N = s.size();
 
 	// Minimum characters needed for all groups:
-	int sg = reduce(group.begin(), group.end()) + (group.size()-1); // 2nd term for the separator
+	const IntT sg = reduce(group.begin(), group.end()) + (group.size()-1); // 2nd term for the separator
 	if (N < sg) {
-		//std::cout << curStr << s <<" FAILS! (More groups than chars left)" << N << " " << group.size() << std::endl;
 		return 0; // If we have more groups than characters left
 	}
 
 	// No more groups
 	if (group.empty()) {
 		// Rest must be '.' or '?'
-		if (s.contains('#')) {
-			//std::cout << curStr << s << " FAILS!" << std::endl;
-			return 0;
-		}
-		//std::cout << curStr << s << " WORKS!" << std::endl;
+		if (s.contains('#')) {			return 0;}
 		return 1;
 	}
 
 	// Use memoization
-	auto const key = make_pair(s, group);
+	auto const key = make_pair(string(s), group);
 	auto const it = memo.find(key);
 	if (it != memo.end()) return it->second;
 
 	IntT sum = 0;
 	// We can just trim a '.' (or a '?' which we interpret as a '.'
 	if (s.starts_with(".") || s.starts_with("?")) {
-		//curStr.push_back('.');
-		sum = getNumSolutions(s.substr(1, N - 1), group);// , curStr);
-		//curStr.pop_back();
+		sum = getNumSolutions(s.substr(1, N - 1), group, grpPos);
 	}
 
 	if (s.starts_with("#") || s.starts_with("?")) {
-		//curStr.push_back('#');
-		const int grpLen = group[0];
+		const IntT grpLen = group[0];
 		const bool isAllowed = !(s.substr(0, grpLen).contains('.'));
 		if (isAllowed) {
 			// Two case: Group is exactly the rest of the string
 			if (grpLen == N) {
 				auto newGrp = group;
 				newGrp.erase(newGrp.begin());
-				//const auto newStr = s.substr(grpLen + 1, N - grpLen - 1);
-				//curStr.append(s.substr(0, grpLen));
-				sum += getNumSolutions("", newGrp); // , curStr);
+				sum += getNumSolutions("", newGrp, grpPos); // , curStr);
 
 				//// If this was the last group then we have a solution
 				//if (group.size() == 1) {
@@ -80,13 +71,10 @@ IntT getNumSolutions(string const& s, vector<IntT> const& group) { //}, string c
 			if( (grpLen < N) && (s[grpLen] != '#')) {		 // Group is shorter, then the next char can't be #
 				auto newGrp = group;
 				newGrp.erase(newGrp.begin());
-			//	curStr.append(s.substr(0, grpLen + 1));
-				const auto newStr = s.substr(grpLen+1, N - grpLen-1);
-				sum += getNumSolutions(newStr, newGrp); // , curStr);
+				sum += getNumSolutions(s.substr(grpLen + 1, N - grpLen - 1), newGrp, grpPos);
 			}
 				
 		}
-		//curStr.pop_back();
 	}
 
 	memo[key] = sum; // Save for memoization
@@ -95,7 +83,7 @@ IntT getNumSolutions(string const& s, vector<IntT> const& group) { //}, string c
 
 
 
-int main()
+int main12()
 {
 	auto rawFile = loadFile("Data/aoc_input_12.txt");
 
@@ -124,7 +112,7 @@ int main()
 			s[s.size()-group.back()-1] = '.';
 		}
 
-		const auto pt1 = getNumSolutions(s, group);// , "");
+		const auto pt1 = getNumSolutions(s, group, 0);// , "");
 		sum1 += pt1;
 		//std::cout << "Cnt: " << cnt << " " << pt1 << " " << sum1 << endl;
 	}
@@ -166,9 +154,9 @@ int main()
 			s[s.size() - group.back() - 1] = '.';
 		}
 
-		const auto pt2 = getNumSolutions(s, group);// , "");
+		const auto pt2 = getNumSolutions(s, group, 0);// , "");
 		sum2 += pt2;
-		//std::cout << "Cnt: " << cnt << " " << pt2 << " " << sum2 << endl;
+		std::cout << "Cnt: " << cnt << " " << pt2 << " " << sum2 << endl;
 	}
 
 	const auto result2 = sum2;

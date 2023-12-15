@@ -62,5 +62,14 @@
     <ClCompile Include="Day12.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Day13.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Day14.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Day15.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
