@@ -24,7 +24,7 @@ IntT hashf(string const& st) {
 	return sr::fold_left(st, 0, [](auto a, auto b) {return ((a + b) * 17) % 256; });
 }
 
-int main()
+int main15()
 {
 	const auto rawFile = loadFile("Data/aoc_input_15.txt");
 
