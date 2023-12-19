@@ -157,7 +157,7 @@ IntT propBeam(vector<string> const & rawFile, IntT xs, IntT ys, IntT dirs) {
 	return sum;
 }
 
-int main()
+int main16()
 {
 	const auto rawFile = loadFile("Data/aoc_input_16.txt");
 
