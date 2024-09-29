@@ -79,7 +79,7 @@ struct Rules {
 };
 
 
-int main()
+int main19()
 {
 	const auto rawFile = loadFile("Data/aoc_input_19.txt");
 
