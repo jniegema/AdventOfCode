@@ -19,7 +19,7 @@ bool isSafe(std::vector<long long int> const& v) {
     return ((allPos || allNeg) && bounded);
 }
 
-int main()
+int main2()
 {
     const auto rawFile = loadFile("Data/aoc_input2.txt");
 
