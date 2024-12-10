@@ -130,8 +130,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day1.cpp" />
+    <ClCompile Include="Day10.cpp" />
     <ClCompile Include="Day2.cpp" />
     <ClCompile Include="Day7.cpp" />
+    <ClCompile Include="Day8.cpp" />
+    <ClCompile Include="Day9.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContainerHelpers.h" />
