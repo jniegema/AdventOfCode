@@ -46,6 +46,7 @@ inline std::vector<std::string> stringToVector(std::string const& s, char delimi
     return result;
 }
 
+
 inline std::vector<std::string> stringToVectorNoEmpty(std::string const& s, char delimiter) {
     std::vector<std::string> result = stringToVector(s,delimiter);
     result.erase(std::remove_if(result.begin(), result.end(), [](std::string const& s) { return s.empty(); }), result.end());
@@ -101,5 +102,16 @@ inline std::string trimString(const std::string& target, const std::string& char
     std::string result = target;
     result.erase(0, result.find_first_not_of(charsToTrim));
     result.erase(result.find_last_not_of(charsToTrim) + 1);
+    return result;
+}
+
+inline std::vector<std::string> stringToVectorTrimmed(std::string const& s, char delimiter, const std::string& charsToTrim=" \t") {
+    std::vector<std::string> result;
+    std::string token;
+
+    std::stringstream ss(s);
+    while (std::getline(ss, token, delimiter)) {
+        result.push_back(trimString(token, charsToTrim));
+    }
     return result;
 }

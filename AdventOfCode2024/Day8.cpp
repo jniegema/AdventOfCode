@@ -21,7 +21,7 @@ using lint = long long int;
 using pint = pair<int, int>;
 using mapt = vector<vector<int>>;
 
-int main()
+int main8()
 {
     map<char, std::vector<pint>> antennas;
 
